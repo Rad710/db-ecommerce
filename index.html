@@ -1,0 +1,116 @@
+<head>
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
+	<title>Database Project</title>
+	<link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Rubik:400,700'>
+	<link rel="stylesheet" href="style.css">
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+	<script src="search_functions.js"></script>
+
+	<script>
+		$(document).ready(function() {
+			$.ajax({
+				type : 'GET',
+				url : '/web_page/php/is_logged.php',
+				}).done(function (result) {
+					$("#replace").html('<p class="text-white mr-4">' + result + '</p>');
+					$("#product").css("visibility", "visible");
+					$("#account").show();
+					
+			}).fail(function() {
+				$("#log-in").css("visibility", "visible");
+				$("#sign-up").css("visibility", "visible");
+			});
+		});
+
+		$(document).ready(function() {
+			$('.log-out').on('click', function() {
+				$.ajax({
+				type : 'GET',
+				url : '/web_page/php/log_out.php',
+				}).done(function (result) {
+					location.reload(true);
+				});
+			});
+		});
+
+		search_function();
+	</script>
+</head>
+
+<body>
+	<div class="main-content">
+		<!-- Header -->
+		<div class=""
+			style="min-height: 300px; background-image: url(./images/homepage_background.jpg); background-size: cover; background-position: center top;">
+			<!-- Mask -->
+			<span class="mask bg-gradient-default opacity-8"></span>
+			<!-- Header container -->
+			<div class="row">
+				<div id="replace" class="text-right col-xl-12">
+					<a style="visibility: hidden;" id="log-in" href="login_menu.html" class="btn btn-info mt-4">Log in</a>
+					<a style="visibility: hidden;" id="sign-up" href="sign_up.html" class="btn btn-info mt-4 mr-4">Sign Up</a>
+				</div>
+			</div>
+			<div class="header pb-4 pt-lg-4 d-flex align-items-center container-fluid d-flex align-items-center">
+				<div class="row">
+					<div class="col-lg-12 col-md-10">
+						<h1 class="display-2 text-white">Database Project</h1>
+						<p class="text-white mt-0 mb-5">This is our e-commerce website. Hope you enjoy it!</p>
+					</div>
+				</div>
+			</div>
+
+			<div class="text-right col-xl-12">
+				<a style="visibility: hidden;" id="product" href="create_product.html" class="btn btn-info mb-2">Create Product</a>
+				<div class="dropdown">
+					<button id="account" class="btn btn-info mb-2 d-none" style="z-index: 100;">User Account</button>
+					<div class="dropdown-content">
+						<a href="user_profile.html">My Profile</a>
+						<a href="orders.html">My Orders</a>
+						<a href="shopping_cart.html">Shopping Cart</a>
+						<a href="my_products.html">My Products</a>
+						<a type="button" href="#" class="log-out">Logout</a>
+					</div>
+				</div>
+			</div>
+
+		</div>
+		<div class="center-screen">
+		<div class="form-group col-xl-10 text-center mb-2">
+			<div class="input-group input-group-alternative">
+				<input id="search-bar" class="input-text" placeholder="Search" type="text">
+			</div>
+		</div>
+		</div>
+		<!-- Page content -->
+		<div class="center-screen">
+		<div class="col-xl-8 order-xl-1">
+			<div class="card-search bg-secondary shadow">
+				<div class="card-header bg-white border-0">
+					<div class="row align-items-center">
+						<div class="col-8">
+							<h3 class="mb-0">Results</h3>
+						</div>
+					</div>
+				</div>
+				<table class="tables-search tables-format">
+					<colgroup>
+						<col span="1" style="width: 40%;">
+						<col span="1" style="width: 30%;">
+						<col span="1" style="width: 30%;">
+					 </colgroup>
+					 <tbody class="tables-search tables-format" id="list_table_json">
+
+					</tbody>
+
+				</table>
+			</div>
+		</div>
+	</div>
+	</div>
+	</div>
+
+
+</body>
